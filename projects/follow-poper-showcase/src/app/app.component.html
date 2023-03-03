@@ -1,0 +1,16 @@
+<div id="app">
+  <div class="demo">
+<!--    <div class="follow-poper" #followPoper>-->
+<!--      {{tip}}-->
+<!--    </div>-->
+    <ng-template #followPoperTmp></ng-template>
+    <div class="list" followPoper [template]="followPoperTmp" [tip]="tip">
+      <ng-container *ngFor="let item of items">
+        <div class="item" [class.active]="tip === item.desc" (click)="setTip(item.desc)">
+          <h5>{{item.title}}</h5>
+          <p>{{item.desc}}</p>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

@@ -3,5 +3,135 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "follow-poper": {
+      "projectType": "library",
+      "root": "projects/follow-poper",
+      "sourceRoot": "projects/follow-poper/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/follow-poper/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/follow-poper/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/follow-poper/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/follow-poper/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    },
+    "follow-poper-showcase": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/follow-poper-showcase",
+      "sourceRoot": "projects/follow-poper-showcase/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/follow-poper-showcase",
+            "index": "projects/follow-poper-showcase/src/index.html",
+            "main": "projects/follow-poper-showcase/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/follow-poper-showcase/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/follow-poper-showcase/src/favicon.ico",
+              "projects/follow-poper-showcase/src/assets"
+            ],
+            "styles": [
+              "projects/follow-poper-showcase/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "follow-poper-showcase:build:production"
+            },
+            "development": {
+              "browserTarget": "follow-poper-showcase:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "follow-poper-showcase:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/follow-poper-showcase/tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/follow-poper-showcase/src/favicon.ico",
+              "projects/follow-poper-showcase/src/assets"
+            ],
+            "styles": [
+              "projects/follow-poper-showcase/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    }
   }
 }

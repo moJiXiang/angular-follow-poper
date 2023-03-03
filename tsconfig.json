@@ -6,6 +6,12 @@
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
+    "strictPropertyInitialization": false,
+    "paths": {
+      "follow-poper": [
+        "dist/follow-poper"
+      ]
+    },
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
@@ -21,7 +27,8 @@
     "useDefineForClassFields": false,
     "lib": [
       "ES2022",
-      "dom"
+      "dom",
+      "dom.iterable"
     ]
   },
   "angularCompilerOptions": {
