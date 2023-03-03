@@ -1,12 +1,15 @@
 <div id="app">
   <div class="demo">
-<!--    <div class="follow-poper" #followPoper>-->
-<!--      {{tip}}-->
-<!--    </div>-->
-    <ng-template #followPoperTmp></ng-template>
-    <div class="list" followPoper [template]="followPoperTmp" [tip]="tip">
+    <ng-template #followPoperTmp let-element>
+      <div class="custom-div" *ngIf="selectedItem">
+        <p>😀</p>
+        <p>{{selectedItem.title}}</p>
+        <p>{{selectedItem.desc}}</p>
+      </div>
+    </ng-template>
+    <div class="list" followPoper [poperTemplate]="followPoperTmp">
       <ng-container *ngFor="let item of items">
-        <div class="item" [class.active]="tip === item.desc" (click)="setTip(item.desc)">
+        <div class="item" [class.active]="selectedItem && selectedItem.title === item.title" (click)="selectItem(item)">
           <h5>{{item.title}}</h5>
           <p>{{item.desc}}</p>
         </div>

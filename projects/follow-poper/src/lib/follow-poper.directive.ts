@@ -1,13 +1,14 @@
-import {AfterViewInit, Directive, ElementRef, Input, TemplateRef} from "@angular/core";
+import {AfterViewInit, Directive, ElementRef, Input, TemplateRef, ViewContainerRef} from "@angular/core";
 import {debounceTime, fromEvent} from "rxjs";
 
 @Directive({
-  selector: "[followPoper]"
+  selector: "[followPoper]",
 })
 export class FollowPoperDirective implements AfterViewInit {
-  @Input() tip: string
-  @Input() template: TemplateRef<any>;
-  constructor(private container: ElementRef) {
+  @Input() tip: string;
+  @Input() poperTemplate: TemplateRef<any>;
+
+  constructor(private container: ElementRef, private viewContainerRef: ViewContainerRef) {
 
   }
 
@@ -21,13 +22,18 @@ export class FollowPoperDirective implements AfterViewInit {
     followPoper.style.transition = "0.3s";
     followPoper.style.transitionTimingFunction = "ease-out";
     followPoper.style.width = "200px";
-    followPoper.style.height = "100px";
+    followPoper.style.height = "auto";
     followPoper.style.visibility = "hidden";
+
+    if (this.poperTemplate) {
+      const content = this.viewContainerRef.createEmbeddedView(this.poperTemplate);
+      console.log(content)
+      followPoper.appendChild(content.rootNodes[0]);
+    }
 
     this.container.nativeElement.parentNode.append(followPoper);
 
     const containerRect = this.container.nativeElement.getBoundingClientRect();
-    const followPoperRect = followPoper.getBoundingClientRect();
 
     followPoper.style.left = containerRect.width + "px";
 
@@ -38,9 +44,12 @@ export class FollowPoperDirective implements AfterViewInit {
       child.addEventListener("click", () => {
         selectedEle = child;
         const selectedEleRect = selectedEle.getBoundingClientRect();
+        const followPoperRect = followPoper.getBoundingClientRect();
 
         // Reset followPoper position style
-        followPoper.textContent = this.tip;
+        if (this.tip) {
+          followPoper.textContent = this.tip;
+        }
         followPoper.style.top = "";
         followPoper.style.bottom = "";
         followPoper.style.visibility = "visible";
@@ -65,6 +74,7 @@ export class FollowPoperDirective implements AfterViewInit {
         if (!selectedEle) return;
 
         const selectedEleRect = selectedEle.getBoundingClientRect();
+        const followPoperRect = followPoper.getBoundingClientRect();
 
         const currentScrollTop = this.container.nativeElement.scrollTop;
         const moveDir = currentScrollTop > 0 && lastScroll <= currentScrollTop ? "up" : "down";
