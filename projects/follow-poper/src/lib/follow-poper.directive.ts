@@ -23,7 +23,7 @@ export class FollowPoperDirective implements AfterViewInit {
     followPoper.style.border = "1px solid #ccc";
     followPoper.style.transition = "0.3s";
     followPoper.style.transitionTimingFunction = "ease-out";
-    followPoper.style.width = "200px";
+    followPoper.style.width = "auto";
     followPoper.style.height = "auto";
     followPoper.style.visibility = "hidden";
 
@@ -54,6 +54,8 @@ export class FollowPoperDirective implements AfterViewInit {
     followPoper.style.left = (containerRect.width + 10) + "px";
 
     let selectedEle: Element;
+
+    const arrowHeight = 20;
 
     // addEventListener to list children, let followPoper follow child
     for (const child of this.container.nativeElement.children) {
@@ -92,20 +94,22 @@ export class FollowPoperDirective implements AfterViewInit {
           poperArrow.style.top = 0 + "px";
         } else if (sb - ct > sh / 2 && sb - ct < fh) {
           // at the top and arrow move with selected item
+          const poperArrowTop = sb - ct - sh / 2 - arrowHeight / 2;
           followPoper.style.top = 0 + "px";
-          poperArrow.style.top = (sb - ct - sh / 2) + "px";
+          poperArrow.style.top = (poperArrowTop < 0 ? 0 : poperArrowTop) + "px";
         } else if (ct < st && cb > sb && (st - ct > fh / 2 - sh / 2 && cb - sb > fh / 2 - sh / 2)) {
           // at the center
           followPoper.style.top = st - ct - (fh - sh) / 2 + "px";
-          poperArrow.style.top = (fh / 2 - 5) + "px";
+          poperArrow.style.top = (fh / 2 - arrowHeight / 2) + "px";
         } else if (cb - st < sh / 2) {
           // at the bottom and arrow not move
           followPoper.style.bottom = 0 + "px";
           poperArrow.style.bottom = 0 + "px";
         } else if (cb - st > sh / 2 && cb - st < fh) {
           // at the bottom and arrow move with selected item
+          const poperArrowBottom = cb - st - sh / 2 - arrowHeight / 2;
           followPoper.style.bottom = 0 + "px";
-          poperArrow.style.bottom = (cb - st - sh / 2) + "px";
+          poperArrow.style.bottom = (poperArrowBottom < 0 ? 0 : poperArrowBottom) + "px";
         } else if (sb - cb > sh) {
           // disappear at the bottom
           followPoper.style.visibility = "hidden";
@@ -163,7 +167,8 @@ export class FollowPoperDirective implements AfterViewInit {
           followPoper.style.top = 0 + "px";
           followPoper.style.bottom = "";
 
-          poperArrow.style.top = (sb - ct - sh / 2) + "px";
+          const poperArrowTop = sb - ct - sh / 2 - arrowHeight / 2;
+          poperArrow.style.top = (poperArrowTop < 0 ? 0 : poperArrowTop) + "px";
           poperArrow.style.bottom = "";
         } else if (ct < st && cb > sb && (st - ct > fh / 2 - sh / 2 && cb - sb > fh / 2 - sh / 2)) {
           // console.log("at the center");
@@ -173,7 +178,7 @@ export class FollowPoperDirective implements AfterViewInit {
           followPoper.style.top = st - ct - (fh - sh) / 2 + "px";
           followPoper.style.bottom = "";
 
-          poperArrow.style.top = (fh / 2 - 5) + "px";
+          poperArrow.style.top = (fh / 2 - arrowHeight / 2) + "px";
           poperArrow.style.bottom = "";
         } else if (cb > st && cb - st < sh / 2) {
           // console.log("at the bottom and arrow not move");
@@ -193,8 +198,9 @@ export class FollowPoperDirective implements AfterViewInit {
           followPoper.style.top = "";
           followPoper.style.bottom = 0 + "px";
 
+          const poperArrowBottom = cb - st - sh / 2 - arrowHeight / 2;
           poperArrow.style.top = "";
-          poperArrow.style.bottom = (cb - st - sh / 2) + "px";
+          poperArrow.style.bottom = (poperArrowBottom < 0 ? 0 : poperArrowBottom) + "px";
         } else if (sb - cb > sh) {
           // console.log("disappear at the bottom");
           // disappear at the bottom
