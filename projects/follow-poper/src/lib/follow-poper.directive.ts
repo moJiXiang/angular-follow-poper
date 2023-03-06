@@ -1,12 +1,12 @@
-import {AfterViewInit, Directive, ElementRef, Input, TemplateRef, ViewContainerRef} from "@angular/core";
+import {AfterViewInit, Directive, ElementRef, Input, Optional, TemplateRef, ViewContainerRef} from "@angular/core";
 import {debounceTime, fromEvent} from "rxjs";
 
 @Directive({
   selector: "[followPoper]",
 })
 export class FollowPoperDirective implements AfterViewInit {
-  @Input() tip: string;
-  @Input() poperTemplate: TemplateRef<any>;
+  @Input() @Optional() tip: string;
+  @Input() @Optional() poperTemplate: TemplateRef<any>;
 
   constructor(private container: ElementRef, private viewContainerRef: ViewContainerRef) {
 
@@ -93,7 +93,7 @@ export class FollowPoperDirective implements AfterViewInit {
               followPoper.style.top = "";
               followPoper.style.bottom = 0 + "px";
             } else {
-              if (topDiffer > 0 && topDiffer <= followPoperRect.height) {
+              if (topDiffer > 0 && topDiffer <= selectedEleRect.height) {
                 followPoper.style.top = 0 + "px";
                 followPoper.style.bottom = "";
               } else {
