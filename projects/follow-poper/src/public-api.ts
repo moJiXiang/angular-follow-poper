@@ -5,3 +5,4 @@
 export * from './lib/follow-poper.service';
 export * from './lib/follow-poper.component';
 export * from './lib/follow-poper.module';
+export * from './lib/follow-poper.directive';

@@ -1,6 +1,23 @@
 {
-  "name": "follow-poper",
+  "name": "angular-follow-poper",
   "version": "0.0.1",
+  "description": "A tooltip show tips beside a list",
+  "author": "moJiXiang",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/moJiXiang/angular-follow-poper.git"
+  },
+  "bugs": {
+    "url": "https://github.com/moJiXiang/angular-follow-poper/issues"
+  },
+  "homepage": "https://github.com/moJiXiang/angular-follow-poper",
+  "keywords": [
+    "angular",
+    "javascript",
+    "typescript",
+    "tooltip"
+  ],
+  "license": "MIT",
   "peerDependencies": {
     "@angular/common": "^15.2.0",
     "@angular/core": "^15.2.0"
