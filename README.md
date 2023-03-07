@@ -6,6 +6,9 @@ https://stackblitz.com/edit/angular-follow-poper?file=src/index.html
 
 https://popper.js.org/
 
+# Preview
+
+![preview](./20230307-091755.gif)
 
 # FollowPoper
 
